@@ -1,9 +1,9 @@
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
-def DT(data):
+def RF(data):
     # Initialize a DecisionTreeClassifier object
-    clf = DecisionTreeClassifier(random_state=42)
+    clf = RandomForestClassifier(n_estimators=100)
 
     # Fit the classifier to the training data
     clf.fit(data.X_train, data.y_train)
