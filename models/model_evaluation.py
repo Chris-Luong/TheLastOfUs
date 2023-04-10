@@ -11,10 +11,8 @@ from sklearn.metrics import precision_score, recall_score, f1_score
 
 class Evaluation:
 
-    # def split_classes(), Split data into "Fatal", "Injury" and "Property Damage Only", "". Used for f1 ROC
-    # def f1_score(self, y_pred, y_true)
-    # def multi_class_f1
-    # def multi_class_auc
+    # TODO: add bias and variance
+
     def precision(self, y_pred, y_true):
         """
          - Multi-class evaluation
@@ -106,8 +104,8 @@ class Evaluation:
 
     def auc_score(self, y_pred, y_true):
         """
+        - binary classification only
         - Input:
-            - binary classification only
             - y_pred of positive class
             - y_true
         - Output:
@@ -117,6 +115,7 @@ class Evaluation:
 
     def accuracy(self, y_pred, y_true):
         """
+        - Multi-class 
         - Input:
             - y_pred
             - y_true
@@ -130,27 +129,28 @@ class Evaluation:
 ### PURELY FOR TESTING ###
 ### REMOVE BEFORE SUBMISSION ###
 # generate a synthetic binary classification dataset
-X, y = make_classification(
-    n_samples=1000, n_features=10, n_informative=5, random_state=42)
+if __name__ == "__main__":
+    X, y = make_classification(
+        n_samples=1000, n_features=10, n_informative=5, random_state=42)
 
-# split the dataset into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42)
+    # split the dataset into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42)
 
-# train a logistic regression model on the training set
-model = LogisticRegression(random_state=42)
-model.fit(X_train, y_train)
+    # train a logistic regression model on the training set
+    model = LogisticRegression(random_state=42)
+    model.fit(X_train, y_train)
 
-# predict the probabilities on the testing set
-# [","]
-y_prob = model.predict_proba(X_test)[:, 1]
-y_predict = model.predict(X_test)
-evaluation = Evaluation()
+    # predict the probabilities on the testing set
+    # [","]
+    y_prob = model.predict_proba(X_test)[:, 1]
+    y_predict = model.predict(X_test)
+    evaluation = Evaluation()
 
-evaluation.plot_roc(y_prob, y_test)
-print(evaluation.auc_score(y_prob, y_test))
-evaluation.confusion(y_predict, y_test)
-print(evaluation.accuracy(y_predict, y_test))
-print(evaluation.recall(y_predict, y_test))
-print(evaluation.precision(y_predict, y_test))
-print(evaluation.f1_score(y_predict, y_test))
+    evaluation.plot_roc(y_prob, y_test)
+    print(evaluation.auc_score(y_prob, y_test))
+    evaluation.confusion(y_predict, y_test)
+    print(evaluation.accuracy(y_predict, y_test))
+    print(evaluation.recall(y_predict, y_test))
+    print(evaluation.precision(y_predict, y_test))
+    print(evaluation.f1_score(y_predict, y_test))
