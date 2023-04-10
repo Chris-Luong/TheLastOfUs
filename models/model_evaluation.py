@@ -11,10 +11,8 @@ from sklearn.metrics import precision_score, recall_score, f1_score
 
 class Evaluation:
 
-    # def split_classes(), Split data into "Fatal", "Injury" and "Property Damage Only", "". Used for f1 ROC
-    # def f1_score(self, y_pred, y_true)
-    # def multi_class_f1
-    # def multi_class_auc
+    # TODO: add bias and variance
+
     def precision(self, y_pred, y_true):
         """
          - Multi-class evaluation

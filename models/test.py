@@ -16,3 +16,8 @@ print(eva.accuracy(log_y_pred, data.y_test))
 print(np.count_nonzero(data.y_test == "Fatal"))
 eva_conf = eva.confusion(log_y_pred, data.y_test)
 eva.plot_confusion(eva_conf)
+
+ecoc_y_pred = log.ecoc()
+print(eva.accuracy(ecoc_y_pred, data.y_test))
+eva_conf = eva.confusion(ecoc_y_pred, data.y_test)
+eva.plot_confusion(eva_conf)
