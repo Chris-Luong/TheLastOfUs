@@ -12,7 +12,6 @@ class LogReg:
     def __init__(self, datasets):
         self.datasets = datasets
 
-    # TODO: Fix so you can input penalty and C
     def one_v_rest(self):
         """
          - One vs Rest logistic regression
@@ -55,5 +54,3 @@ class LogReg:
         y_pred = lb.inverse_transform(y_pred_binary)
 
         return y_pred
-    # Probabilities?
-    #
