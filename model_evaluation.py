@@ -6,9 +6,55 @@ from sklearn.datasets import make_classification
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, auc
 from sklearn.metrics import confusion_matrix
+from sklearn.metrics import precision_score, recall_score, f1_score
 
 
 class Evaluation:
+
+    # def split_classes(), Split data into "Fatal", "Injury" and "Property Damage Only", "". Used for f1 ROC
+    # def f1_score(self, y_pred, y_true)
+    # def multi_class_f1
+    # def multi_class_auc
+    def precision(self, y_pred, y_true):
+        """
+         - Multi-class evaluation
+         - Input:
+            - y_true
+            - y_pred
+         - Output:
+            - returns precision score
+        """
+        # macro - unweighted average across all classes
+        # Can use wieghted - weighted per num in each class
+        return precision_score(y_true, y_pred, average="macro")
+
+    def recall(self, y_pred, y_true):
+        """
+         - Multi-class evaluation
+         - True Positives / (True Positives + False Negatives)
+         - Input:
+            - y_true
+            - y_pred
+         - Output:
+            - returns recall  score
+        """
+        # macro - unweighted average across all classes
+        # Can use wieghted - weighted per num in each class
+        return recall_score(y_true, y_pred, average="macro")
+
+    def f1_score(self, y_pred, y_true):
+        """
+         - Multi-class evaluation
+         - 2 * (Precision * Recall) / (Precision + Recall)
+         - Input:
+            - y_true
+            - y_pred
+         - Output:
+            - returns f_1 score
+        """
+        # macro - unweighted average across all classes
+        # Can use wieghted - weighted per num in each class
+        return f1_score(y_true, y_pred, average="macro")
 
     def confusion(self, y_pred, y_true):
         """
@@ -105,3 +151,6 @@ evaluation.plot_roc(y_prob, y_test)
 print(evaluation.auc_score(y_prob, y_test))
 evaluation.confusion(y_predict, y_test)
 print(evaluation.accuracy(y_predict, y_test))
+print(evaluation.recall(y_predict, y_test))
+print(evaluation.precision(y_predict, y_test))
+print(evaluation.f1_score(y_predict, y_test))
