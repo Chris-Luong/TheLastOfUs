@@ -21,7 +21,9 @@ class LogReg:
         # Create a one-vs-all logistic regression model and fit it to the training data
         # Saga is recommended for larger datasets and uses a version of SGD
         lr = LogisticRegression(
-            max_iter=1000, solver="saga", multi_class='ovr', penalty="l1", C=0.1)
+            max_iter=1000, solver="saga", multi_class='ovr')
+        # , class_weight={0: 31, 1: 2, 2: 1}
+        # , penalty="l2", C=0.1,
         ova = OneVsRestClassifier(lr)
         ova.fit(self.datasets.X_train, self.datasets.y_train)
 
