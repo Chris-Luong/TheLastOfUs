@@ -109,3 +109,13 @@ X_test.to_csv("X_test.csv", encoding='utf-8', index=False)
 y_train.to_csv("y_train.csv", encoding='utf-8', index=False)
 y_val.to_csv("y_val.csv", encoding='utf-8', index=False)
 y_test.to_csv("y_test.csv", encoding='utf-8', index=False)
+
+# combine Injury and Fatal into one class in the target variable -- binary classification instead of multiclass
+y_train.replace(('Injury', 'Fatal'), ('Injury or Fatal', 'Injury or Fatal'), inplace=True)
+y_test.replace(('Injury', 'Fatal'), ('Injury or Fatal', 'Injury or Fatal'), inplace=True)
+y_val.replace(('Injury', 'Fatal'), ('Injury or Fatal', 'Injury or Fatal'), inplace=True)
+
+# save binary y datasets
+y_train.to_csv("y_train_binary.csv", encoding='utf-8', index=False)
+y_val.to_csv("y_val_binary.csv", encoding='utf-8', index=False)
+y_test.to_csv("y_test_binary.csv", encoding='utf-8', index=False)
