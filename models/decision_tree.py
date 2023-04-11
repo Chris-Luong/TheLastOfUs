@@ -3,7 +3,11 @@ from sklearn.metrics import accuracy_score
 
 def DT(data):
     # Initialize a DecisionTreeClassifier object
-    clf = DecisionTreeClassifier(random_state=42)
+    clf = DecisionTreeClassifier(random_state=42,
+                                 max_depth=5,
+                                 min_samples_split=20,
+                                 min_samples_leaf=10,
+                                 criterion='entropy')
 
     # Fit the classifier to the training data
     clf.fit(data.X_train, data.y_train_binary)

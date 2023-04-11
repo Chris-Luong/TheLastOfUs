@@ -3,7 +3,7 @@ from sklearn.metrics import accuracy_score
 
 def RF(data):
     # Initialize a DecisionTreeClassifier object
-    clf = RandomForestClassifier(n_estimators=100)
+    clf = RandomForestClassifier(n_estimators=100, max_features=5)
 
     # Fit the classifier to the training data
     clf.fit(data.X_train, data.y_train_binary)
