@@ -1,12 +1,8 @@
-
-import importlib
 from datasets import Datasets
 from logistic_regression import LogReg
 from model_evaluation import Evaluation
 import numpy as np
 import decision_tree, random_forest
-
-importlib.import_module("decision_tree")
 
 pth = "../"
 data = Datasets(pth + "X_train.csv", pth + "X_test.csv", pth + "X_val.csv",
