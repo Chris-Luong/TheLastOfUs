@@ -10,7 +10,7 @@ def DT(data):
                                  criterion='entropy')
 
     # Fit the classifier to the training data
-    clf.fit(data.X_train, data.y_train_binary)
+    clf.fit(data.X_train, data.y_train)
 
     # Use the trained classifier to make predictions on the test data
     y_pred = clf.predict(data.X_test)
