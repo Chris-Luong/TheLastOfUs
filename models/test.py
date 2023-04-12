@@ -6,6 +6,7 @@ import decision_tree, random_forest
 from base_model import Base
 from naive_bayes import NaiveBayes
 from neural_net import NeuralNet
+from gradient_boost import GradientBoost
 
 pth = "../"
 data = Datasets(pth + "X_train.csv", pth + "X_test.csv", pth + "X_val.csv",
@@ -53,6 +54,18 @@ print("Precision:", eva.precision(nn_y_pred_test, data_b.y_test))
 print("F1 Score:", eva.f1_score(nn_y_pred_test, data_b.y_test))
 print(np.count_nonzero(data_b.y_test == "Injury or Fatal"))
 eva_conf = eva.confusion(nn_y_pred_test, data_b.y_test)
+eva.plot_confusion(eva_conf)
+
+# Gradient Boosting
+gb = GradientBoost(data_b)
+gb_y_pred_train, gb_y_pred_val, gb_y_pred_test = gb.gbc()
+eva = Evaluation()
+print("Accuracy:", eva.accuracy(gb_y_pred_test, data_b.y_test))
+print("Recall:", eva.recall(gb_y_pred_test, data_b.y_test))
+print("Precision:", eva.precision(gb_y_pred_test, data_b.y_test))
+print("F1 Score:", eva.f1_score(gb_y_pred_test, data_b.y_test))
+print(np.count_nonzero(data_b.y_test == "Injury or Fatal"))
+eva_conf = eva.confusion(gb_y_pred_test, data_b.y_test)
 eva.plot_confusion(eva_conf)
 
 # Decision Tree
