@@ -17,8 +17,7 @@ data_b = Datasets(pth + "X_train.csv", pth + "X_test.csv", pth + "X_val.csv",
 
 log = LogReg(data)
 
-DT_y_pred = decision_tree.DT(data)
-RF_y_pred =random_forest.RF(data)
+
 
 # base model (predicts "Property Damage Only" for everything)
 bm = Base(data_b)
@@ -69,17 +68,25 @@ eva_conf = eva.confusion(gb_y_pred_test, data_b.y_test)
 eva.plot_confusion(eva_conf)
 
 # Decision Tree
+DT_y_pred = decision_tree.DT(data_b)
 eva = Evaluation()
-print(eva.accuracy(DT_y_pred, data.y_test))
-print(np.count_nonzero(data.y_test == "Fatal"))
-eva_conf = eva.confusion(DT_y_pred, data.y_test)
+print("Accuracy:", eva.accuracy(DT_y_pred, data_b.y_test))
+print("Recall:", eva.recall(DT_y_pred, data_b.y_test))
+print("Precision:", eva.precision(DT_y_pred, data_b.y_test))
+print("F1 Score:", eva.f1_score(DT_y_pred, data_b.y_test))
+print("Test non-property damage:", np.count_nonzero(data_b.y_test == "Injury or Fatal"))
+eva_conf = eva.confusion(DT_y_pred, data_b.y_test)
 eva.plot_confusion(eva_conf)
 
 # Random Forest
+RF_y_pred = random_forest.RF(data_b)
 eva = Evaluation()
-print(eva.accuracy(RF_y_pred, data.y_test))
-print(np.count_nonzero(data.y_test == "Fatal"))
-eva_conf = eva.confusion(RF_y_pred, data.y_test)
+print("Accuracy:", eva.accuracy(RF_y_pred, data_b.y_test))
+print("Recall:", eva.recall(RF_y_pred, data_b.y_test))
+print("Precision:", eva.precision(RF_y_pred, data_b.y_test))
+print("F1 Score:", eva.f1_score(RF_y_pred, data_b.y_test))
+print("Test non-property damage:", np.count_nonzero(data_b.y_test == "Injury or Fatal"))
+eva_conf = eva.confusion(RF_y_pred, data_b.y_test)
 eva.plot_confusion(eva_conf)
 
 # One vs Rest Logistic regression prediction

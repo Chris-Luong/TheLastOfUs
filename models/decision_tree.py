@@ -1,5 +1,5 @@
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import accuracy_score
+from grid_search_CV import grid_search_cv
 
 # Best parameters
 # Used entropy as it was better overall and compute time was not a concern.
