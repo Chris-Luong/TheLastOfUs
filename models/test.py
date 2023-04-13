@@ -2,21 +2,24 @@ from datasets import Datasets
 from logistic_regression import LogReg
 from model_evaluation import Evaluation
 import numpy as np
-import decision_tree, random_forest
+import decision_tree
+import random_forest
 from base_model import Base
 from naive_bayes import NaiveBayes
 from neural_net import NeuralNet
 from gradient_boost import GradientBoost
+from sklearn.metrics import confusion_matrix
+
 
 pth = "../"
 data = Datasets(pth + "X_train.csv", pth + "X_test.csv", pth + "X_val.csv",
                 pth + "y_train.csv", pth + "y_test.csv", pth + "y_val.csv")
 # two classes (Injury and Fatal combined into class Injury or Fatal)
 data_b = Datasets(pth + "X_train.csv", pth + "X_test.csv", pth + "X_val.csv",
-                pth + "y_train_binary.csv", pth + "y_test_binary.csv", pth + "y_val_binary.csv")
+                  pth + "y_train_binary.csv", pth + "y_test_binary.csv", pth + "y_val_binary.csv")
 
 log = LogReg(data)
-
+eva = Evaluation()
 
 
 # base model (predicts "Property Damage Only" for everything)
@@ -90,14 +93,19 @@ eva_conf = eva.confusion(RF_y_pred, data_b.y_test)
 eva.plot_confusion(eva_conf)
 
 # One vs Rest Logistic regression prediction
+'''
 log_y_pred = log.one_v_rest()
-eva = Evaluation()
+
 print(eva.accuracy(log_y_pred, data.y_test))
 print(np.count_nonzero(data.y_test == "Fatal"))
 eva_conf = eva.confusion(log_y_pred, data.y_test)
+print(eva_conf)
 eva.plot_confusion(eva_conf)
+'''
 
+'''
 ecoc_y_pred = log.ecoc()
 print(eva.accuracy(ecoc_y_pred, data.y_test))
 eva_conf = eva.confusion(ecoc_y_pred, data.y_test)
 eva.plot_confusion(eva_conf)
+'''
