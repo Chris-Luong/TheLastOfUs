@@ -1,18 +1,7 @@
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import GridSearchCV
-# from sklearn.metrics import accuracy_score
+from grid_search_CV import grid_search_cv
 
-# These parameters based off grid search with cross validation
-# params = {
-#     # "n_estimators": 80,
-#     "min_samples_leaf": 30,
-#     "min_samples_split": 2,
-#     "max_depth": 20,
-#     "max_features": 60,
-#     'criterion': "gini",
-#     'n_jobs': 15,
-#     'random_state': 42
-# }
+# These are the best parameters based off grid search with cross validation
 params = {
     'n_estimators': 80,
     'max_depth': 20,
@@ -23,37 +12,32 @@ params = {
     'n_jobs': 15,
     'random_state': 42,
 }
-def grid_search_cv(x_train, y_train):
-    # The parameter space
-    # parameter_space = {
-    #     "min_samples_leaf": [30, 31],
-    #     "min_samples_split": [2, 10],
-    #     "max_depth": [18, 20],
-    #     "max_features": [60, 80]
-    # }
-    # Takes very long
-    parameter_space = {
-        "min_samples_leaf": [30, 31, 40],
-        "min_samples_split": [2, 3, 10],
-        "max_depth": [9, 10, 18, 20],
-        "max_features": [60, 80, 100]
-    }
-    # do the grid search with cross validation
-    print("Tuning hyper-parameters by gridsearch")
-    model = RandomForestClassifier(
-        criterion="gini",
-        n_jobs=15,
-        random_state=42)
-    grid = GridSearchCV(model, parameter_space, cv=5) # scoring="accuracy" ?
-    grid.fit(x_train, y_train)
 
-    # get the best parameters on the sample of training set
-    print("The best parameters are: ", grid.best_params_)
-    print("Best score is: ", grid.best_score_)
-    return grid.best_params_
+# Arguments for grid search function
+
+param_space = {
+    "min_samples_leaf": [30, 31],
+    "min_samples_split": [2, 10],
+    "max_depth": [18, 20],
+    "max_features": [60, 80]
+}
+# Takes very long
+parameter_space = {
+    "min_samples_leaf": [30, 31, 40],
+    "min_samples_split": [2, 3, 10],
+    "max_depth": [9, 10, 18, 20],
+    "max_features": [60, 80, 100]
+}
+
+model = RandomForestClassifier(
+    criterion="gini",
+    n_jobs=15,
+    random_state=42)
 
 def RF(data):
-    # params = grid_search_cv(data.X_train, data.y_train)
+    # Get best parameters from grid search
+    # params = grid_search_cv(data.X_train, data.y_train, param_space, model)
+    
     # Initialize a DecisionTreeClassifier object
     clf = RandomForestClassifier(**params)
 
