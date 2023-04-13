@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 from math import radians, sin, cos, sqrt, atan2
 from sklearn.model_selection import train_test_split
+from feature_selection import filter_features_pearson
 
 # load datasets
 road_crash = pd.read_csv("data/ACT_Road_Crash_Data.csv")
@@ -102,10 +103,8 @@ X_train_val, X_test, y_train_val, y_test = train_test_split(X, y, test_size=0.2,
 # Split the train/valdation set into train and validation sets (60/40 split) 
 X_train, X_val, y_train, y_val = train_test_split(X_train_val, y_train_val, test_size=0.25, random_state=42, stratify=y_train_val)
 
-# save x & y train, validation, and test sets as csv files
-X_train.to_csv("X_train.csv", encoding='utf-8', index=False)
-X_val.to_csv("X_val.csv", encoding='utf-8', index=False)
-X_test.to_csv("X_test.csv", encoding='utf-8', index=False)
+# save y train, validation, and test sets as csv files
+
 y_train.to_csv("y_train.csv", encoding='utf-8', index=False)
 y_val.to_csv("y_val.csv", encoding='utf-8', index=False)
 y_test.to_csv("y_test.csv", encoding='utf-8', index=False)
@@ -119,3 +118,10 @@ y_val.replace(('Injury', 'Fatal'), ('Injury or Fatal', 'Injury or Fatal'), inpla
 y_train.to_csv("y_train_binary.csv", encoding='utf-8', index=False)
 y_val.to_csv("y_val_binary.csv", encoding='utf-8', index=False)
 y_test.to_csv("y_test_binary.csv", encoding='utf-8', index=False)
+
+# Get descending order of features using Pearson correlation
+# Save x train, validation, and test sets as CSV files
+X_train, X_val, X_test = filter_features_pearson()
+X_train.to_csv("X_train.csv", encoding='utf-8', index=False)
+X_val.to_csv("X_val.csv", encoding='utf-8', index=False)
+X_test.to_csv("X_test.csv", encoding='utf-8', index=False)
