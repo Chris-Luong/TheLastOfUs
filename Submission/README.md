@@ -1,6 +1,8 @@
 # TheLastOfUs
 
 1. Run `feature_engineering.py`. This script will open the original datasets, drop unnecessary features, encode other features into the necessary format, and split the data into training, validation, and test sets. The split datasets are saved as separate `.csv` files in the Data folder.
+  - ACT Road Crash Data (CC - Attribution 4.0 International): https://www.data.act.gov.au/Transport/ACT-Road-Crash-Data/6jn4-m8rx
+  - Traffic Speed Camera Locations (CC - Attribution 4.0 International): https://www.data.act.gov.au/Justice-Safety-and-Emergency/Traffic-speed-camera-locations/426s-vdu4
 2. The Models folder contains all the machine learning models that were created. Hyperparameters can be changed inside these files.
   - `base_model.py`
   - `decision_tree.py`
