@@ -18,3 +18,4 @@
   - `grid_search_CV.py` - creates a function to do grid search with cross validation and return the best-performing parameters
   - `model_evaluation.py` - creates a class containing the necessary functions for evaluating the performance of a model
   - `test.py` - loads each model and performs evaluation
+  - `final_model.py` - loads and runs the final model with the best metrics
