@@ -5,6 +5,8 @@ from math import radians, sin, cos, sqrt, atan2
 from sklearn.model_selection import train_test_split
 from feature_selection import filter_features_pearson
 
+NUM_FEATURES = 178
+
 # load datasets
 road_crash = pd.read_csv("data/ACT_Road_Crash_Data.csv")
 speed_cameras = pd.read_csv("data/Traffic_speed_camera_locations.csv")
@@ -121,7 +123,7 @@ y_test.to_csv("y_test_binary.csv", encoding='utf-8', index=False)
 
 # Get descending order of features using Pearson correlation
 # Save x train, validation, and test sets as CSV files
-X_train, X_val, X_test = filter_features_pearson()
+X_train, X_val, X_test = filter_features_pearson(NUM_FEATURES)
 X_train.to_csv("X_train.csv", encoding='utf-8', index=False)
 X_val.to_csv("X_val.csv", encoding='utf-8', index=False)
 X_test.to_csv("X_test.csv", encoding='utf-8', index=False)
