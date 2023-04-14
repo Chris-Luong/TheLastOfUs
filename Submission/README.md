@@ -1,6 +1,6 @@
 # Car Crash Severity Prediction - The Last of Us
 
-1. Run `feature_engineering.py`. This script will open the original datasets, drop unnecessary features, encode other features into the necessary format, and split the data into training, validation, and test sets. The split datasets are saved as separate `.csv` files in the Data folder. The target variable is Crash Severity, which has three classes: 'Property Damage Only', 'Injury', and 'Fatal'. 'Injury' and 'Fatal' were combined into one class 'Injury or Fatal'.
+1. Run `feature_engineering.py`. This script will open the original datasets, drop unnecessary features, encode other features into the necessary format, and split the data into training, validation, and test sets. The split datasets are saved as separate `.csv` files in the Data folder. The target variable is Crash Severity, which has three classes: 'Property Damage Only', 'Injury', and 'Fatal'. 'Injury' and 'Fatal' were combined into one class 'Injury or Fatal'. The `feature_selection.py` contains a function that returns the top n most correlated features to the target variable. 
   - ACT Road Crash Data (CC - Attribution 4.0 International): https://www.data.act.gov.au/Transport/ACT-Road-Crash-Data/6jn4-m8rx
   - Traffic Speed Camera Locations (CC - Attribution 4.0 International): https://www.data.act.gov.au/Justice-Safety-and-Emergency/Traffic-speed-camera-locations/426s-vdu4
 2. The Models folder contains all the machine learning models that were created. Hyperparameters can be changed inside these files.
