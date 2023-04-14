@@ -1,1 +1,16 @@
 # TheLastOfUs
+
+1. Run `feature_engineering.py`. This script will open the original datasets, drop unnecessary features, encode other features into the necessary format, and split the data into training, validation, and test sets. The split datasets are saved as separate `.csv` files in the Data folder.
+2. The Models folder contains all the machine learning models that were created. Hyperparameters can be changed inside these files.
+  - `base_model.py`
+  - `decision_tree.py`
+  - `gradient_boost.py`
+  - `logistic_regression.py`
+  - `naive_bayes.py`
+  - `neural_net.py`
+  - `random_forest.py`
+3. The Models folder also contains helper code.
+  - `datasets.py` - creates a class that loads the split datasets into variables
+  - `grid_search_CV.py` - creates a function to do grid search with cross validation and return the best-performing parameters
+  - `model_evaluation.py` - creates a class containing the necessary functions for evaluating the performance of a model
+  - `test.py` - loads each model and performs evaluation
