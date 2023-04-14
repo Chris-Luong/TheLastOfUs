@@ -62,7 +62,7 @@ class LogReg:
         clf = svm.SVC(kernel='linear')
 
         # Train the classifier on the training data
-        clf.fit(self.datasets.X_train, self.datasets.y_train)
+        clf.fit(self.datasets.X_train, self.datasets.y_train.values.ravel())
 
         # Predict labels on the test data
         y_pred = clf.predict(self.datasets.X_test)
