@@ -11,17 +11,21 @@ from gradient_boost import GradientBoost
 from sklearn.metrics import confusion_matrix
 
 
-pth = "../"
-data = Datasets(pth + "X_train.csv", pth + "X_test.csv", pth + "X_val.csv",
-                pth + "y_train.csv", pth + "y_test.csv", pth + "y_val.csv")
+pth_y = "../Data/Unused/"
+pth_x = "../Data/"
+data = Datasets(pth_x + "X_train.csv", pth_x + "X_test.csv", pth_x + "X_val.csv",
+                pth_y + "y_train.csv", pth_y + "y_test.csv", pth_y + "y_val.csv")
+
 # two classes (Injury and Fatal combined into class Injury or Fatal)
+
+pth = "../Data/"
 data_b = Datasets(pth + "X_train.csv", pth + "X_test.csv", pth + "X_val.csv",
                   pth + "y_train_binary.csv", pth + "y_test_binary.csv", pth + "y_val_binary.csv")
 
-log = LogReg(data)
+
 eva = Evaluation()
 
-
+'''
 # base model (predicts "Property Damage Only" for everything)
 bm = Base(data_b)
 bm_y_pred_train, bm_y_pred_val, bm_y_pred_test = bm.base()
@@ -33,6 +37,7 @@ print("F1 Score:", eva.f1_score(bm_y_pred_test, data_b.y_test))
 print(np.count_nonzero(data_b.y_test == "Injury or Fatal"))
 eva_conf = eva.confusion(bm_y_pred_test, data_b.y_test)
 eva.plot_confusion(eva_conf)
+
 
 # Naive Bayes
 nb = NaiveBayes(data_b)
@@ -90,22 +95,42 @@ print("Precision:", eva.precision(RF_y_pred, data_b.y_test))
 print("F1 Score:", eva.f1_score(RF_y_pred, data_b.y_test))
 print("Test non-property damage:", np.count_nonzero(data_b.y_test == "Injury or Fatal"))
 eva_conf = eva.confusion(RF_y_pred, data_b.y_test)
+eva.plot_confusion(eva_conf) '''
+
+log = LogReg(data_b)
+log_y_pred = log.log_reg()
+print("Accuracy:", eva.accuracy(log_y_pred, data_b.y_test))
+print("Recall:", eva.recall(log_y_pred, data_b.y_test))
+print("Precision:", eva.precision(log_y_pred, data_b.y_test))
+print("F1 Score:", eva.f1_score(log_y_pred, data_b.y_test))
+print("Test non-property damage:",
+      np.count_nonzero(data_b.y_test == "Injury or Fatal"))
+eva_conf = eva.confusion(log_y_pred, data_b.y_test)
 eva.plot_confusion(eva_conf)
 
-# One vs Rest Logistic regression prediction
 '''
-log_y_pred = log.one_v_rest()
-
-print(eva.accuracy(log_y_pred, data.y_test))
-print(np.count_nonzero(data.y_test == "Fatal"))
-eva_conf = eva.confusion(log_y_pred, data.y_test)
-print(eva_conf)
+# One vs Rest Logistic regressio
+# Multi classification problem only
+log = LogReg(data)
+log_ovr_y_pred = log.one_v_rest()
+print("Accuracy:", eva.accuracy(log_ovr_y_pred, data.y_test))
+print("Recall:", eva.recall(log_ovr_y_pred, data.y_test))
+print("Precision:", eva.precision(log_ovr_y_pred, data.y_test))
+print("F1 Score:", eva.f1_score(log_ovr_y_pred, data.y_test))
+print("Test non-property damage:",
+      np.count_nonzero(data.y_test == "Injury or Fatal"))
+eva_conf = eva.confusion(log_ovr_y_pred, data.y_test)
 eva.plot_confusion(eva_conf)
-'''
 
-'''
+# Error Correcting Output Codes logistic regression
+# Multi classification problem only
 ecoc_y_pred = log.ecoc()
-print(eva.accuracy(ecoc_y_pred, data.y_test))
+print("Accuracy:", eva.accuracy(ecoc_y_pred, data.y_test))
+print("Recall:", eva.recall(ecoc_y_pred, data.y_test))
+print("Precision:", eva.precision(ecoc_y_pred, data.y_test))
+print("F1 Score:", eva.f1_score(ecoc_y_pred, data.y_test))
+print("Test non-property damage:",
+      np.count_nonzero(data.y_test == "Injury or Fatal"))
 eva_conf = eva.confusion(ecoc_y_pred, data.y_test)
 eva.plot_confusion(eva_conf)
 '''
