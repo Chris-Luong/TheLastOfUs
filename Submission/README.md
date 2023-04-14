@@ -4,6 +4,7 @@
   - ACT Road Crash Data (CC - Attribution 4.0 International): https://www.data.act.gov.au/Transport/ACT-Road-Crash-Data/6jn4-m8rx
   - Traffic Speed Camera Locations (CC - Attribution 4.0 International): https://www.data.act.gov.au/Justice-Safety-and-Emergency/Traffic-speed-camera-locations/426s-vdu4
 2. The Models folder contains all the machine learning models that were created. Hyperparameters can be changed inside these files.
+  - `ada_boost.py`
   - `base_model.py`
   - `decision_tree.py`
   - `gradient_boost.py`
@@ -11,6 +12,7 @@
   - `naive_bayes.py`
   - `neural_net.py`
   - `random_forest.py`
+  - `svm.py`
 3. The Models folder also contains helper code.
   - `datasets.py` - creates a class that loads the split datasets into variables
   - `grid_search_CV.py` - creates a function to do grid search with cross validation and return the best-performing parameters
