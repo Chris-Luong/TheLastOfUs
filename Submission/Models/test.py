@@ -27,7 +27,7 @@ data_b = Datasets(pth + "X_train.csv", pth + "X_test.csv", pth + "X_val.csv",
 
 eva = Evaluation()
 
-'''
+
 # base model (predicts "Property Damage Only" for everything)
 bm = Base(data_b)
 bm_y_pred_train, bm_y_pred_val, bm_y_pred_test = bm.base()
@@ -79,7 +79,8 @@ print("Accuracy:", eva.accuracy(DT_y_pred, data_b.y_test))
 print("Recall:", eva.recall(DT_y_pred, data_b.y_test))
 print("Precision:", eva.precision(DT_y_pred, data_b.y_test))
 print("F1 Score:", eva.f1_score(DT_y_pred, data_b.y_test))
-print("Test non-property damage:", np.count_nonzero(data_b.y_test == "Injury or Fatal"))
+print("Test non-property damage:",
+      np.count_nonzero(data_b.y_test == "Injury or Fatal"))
 eva_conf = eva.confusion(DT_y_pred, data_b.y_test)
 eva.plot_confusion(eva_conf)
 
@@ -89,7 +90,8 @@ print("Accuracy:", eva.accuracy(RF_y_pred, data_b.y_test))
 print("Recall:", eva.recall(RF_y_pred, data_b.y_test))
 print("Precision:", eva.precision(RF_y_pred, data_b.y_test))
 print("F1 Score:", eva.f1_score(RF_y_pred, data_b.y_test))
-print("Test non-property damage:", np.count_nonzero(data_b.y_test == "Injury or Fatal"))
+print("Test non-property damage:",
+      np.count_nonzero(data_b.y_test == "Injury or Fatal"))
 eva_conf = eva.confusion(RF_y_pred, data_b.y_test)
 eva.plot_confusion(eva_conf)
 
@@ -129,28 +131,28 @@ print("Test non-property damage:",
       np.count_nonzero(data.y_test == "Injury or Fatal"))
 eva_conf = eva.confusion(ecoc_y_pred, data.y_test)
 eva.plot_confusion(eva_conf)
-'''
+
 
 # Ada Boost
 ada_boost = AdaBoost(data_b)
 ada_pred = ada_boost.adaBoost(1, 50, 1)
-print("Accuracy:", eva.accuracy(ada_pred, data.y_test.to_numpy().flatten()))
-print("Recall:", eva.recall(ada_pred, data.y_test.to_numpy().flatten()))
-print("Precision:", eva.precision(ada_pred, data.y_test.to_numpy().flatten()))
-print("F1 Score:", eva.f1_score(ada_pred, data.y_test.to_numpy().flatten()))
+print("Accuracy:", eva.accuracy(ada_pred, data_b.y_test))
+print("Recall:", eva.recall(ada_pred, data_b.y_test))
+print("Precision:", eva.precision(ada_pred, data_b.y_test))
+print("F1 Score:", eva.f1_score(ada_pred, data_b.y_test))
 print("Test non-property damage:",
-      np.count_nonzero(data.y_test.to_numpy().flatten() == "Injury or Fatal"))
-eva_conf = eva.confusion(ada_pred, data.y_test.to_numpy().flatten())
+      np.count_nonzero(data_b.y_test == "Injury or Fatal"))
+eva_conf = eva.confusion(ada_pred, data_b.y_test)
 eva.plot_confusion(eva_conf)
 
 # SVM
 svm = SVM(data_b)
 svm_pred = svm.svm()
-print("Accuracy:", eva.accuracy(svm_pred, data.y_test))
-print("Recall:", eva.recall(svm_pred, data.y_test))
-print("Precision:", eva.precision(svm_pred, data.y_test))
-print("F1 Score:", eva.f1_score(svm_pred, data.y_test))
+print("Accuracy:", eva.accuracy(svm_pred, data_b.y_test))
+print("Recall:", eva.recall(svm_pred, data_b.y_test))
+print("Precision:", eva.precision(svm_pred, data_b.y_test))
+print("F1 Score:", eva.f1_score(svm_pred, data_b.y_test))
 print("Test non-property damage:",
-      np.count_nonzero(data.y_test == "Injury or Fatal"))
-eva_conf = eva.confusion(svm_pred, data.y_test)
+      np.count_nonzero(data_b.y_test == "Injury or Fatal"))
+eva_conf = eva.confusion(svm_pred, data_b.y_test)
 eva.plot_confusion(eva_conf)

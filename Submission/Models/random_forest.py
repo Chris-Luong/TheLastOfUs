@@ -34,16 +34,17 @@ model = RandomForestClassifier(
     n_jobs=15,
     random_state=42)
 
+
 def RF(data):
     # Get best parameters from grid search
     # params = grid_search_cv(data.X_train, data.y_train, param_space, model)
-    
+
     # Initialize a DecisionTreeClassifier object
     clf = RandomForestClassifier(**params)
 
     # Fit the classifier to the training data, using top 16 features
     # to get the best results for accuracy and F1 and decrease computation time
-    clf.fit(data.X_train.iloc[:, :16], data.y_train)
+    clf.fit(data.X_train.iloc[:, :16], data.y_train.values.ravel())
 
     # Use the trained classifier to make predictions on the test data
     y_pred = clf.predict(data.X_test.iloc[:, :16])

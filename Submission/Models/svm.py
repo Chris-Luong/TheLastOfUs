@@ -1,4 +1,5 @@
 from sklearn import svm
+from sklearn.preprocessing import LabelBinarizer
 
 
 class SVM:
@@ -17,9 +18,10 @@ class SVM:
         clf = svm.SVC(kernel='linear')
 
         # Train the classifier on X_train
-        clf.fit(self.datasets.X_train, self.datasets.y_train.values.ravel())
+        clf.fit(self.datasets.X_train.iloc[:, :16],
+                self.datasets.y_train.values.ravel())
 
         # Predict labels on X_test
-        y_pred = clf.predict(self.datasets.X_test)
+        y_pred = clf.predict(self.datasets.X_val.iloc[:, :16])
 
         return y_pred
