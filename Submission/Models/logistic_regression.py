@@ -18,12 +18,14 @@ class LogReg:
          - Returns:
             - y prediction on X_test
         """
-        lr = LogisticRegression(
-            max_iter=1000, solver="saga")
-        # , class_weight={0: 75, 1: 1}
-        lr.fit(self.datasets.X_train, self.datasets.y_train.values.ravel())
 
-        return lr.predict(self.datasets.X_test)
+        lr = LogisticRegression(
+            max_iter=1000, solver="saga", class_weight={'Injury or Fatal': 0.75, 'Property Damage Only': 0.25})
+        # , class_weight={0: 75, 1: 1}
+        lr.fit(self.datasets.X_train.iloc[:, :75],
+               self.datasets.y_train.values.ravel())
+
+        return lr.predict(self.datasets.X_val.iloc[:, :75])
 
     def one_v_rest(self):
         """
