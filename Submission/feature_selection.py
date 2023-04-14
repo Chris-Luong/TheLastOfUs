@@ -1,12 +1,12 @@
 import pandas as pd
 
-def filter_features_pearson():
+def filter_features_pearson(n):
     X_train = pd.read_csv("X_train.csv")
     X_val = pd.read_csv("X_val.csv")
     X_test = pd.read_csv("X_test.csv")
     y_train = pd.read_csv("y_train_binary.csv")
     # def feature_select_pearson(train, test):
-    print('Filter method to select top 178 features...')
+    print('Filter method to select top n features...')
     train = X_train
     val = X_val
     test = X_test
@@ -31,9 +31,9 @@ def filter_features_pearson():
         print(train[[feature, target]])
         corr.append(abs(train[[feature, target]].fillna(0).corr().values[0][1]))
 
-    # get top 178 features with the highest correlation
+    # get top n features with the highest correlation
     se = pd.Series(corr, index=featureSelect).sort_values(ascending=False)
-    feature_select = se[:178].index.tolist()
+    feature_select = se[:n].index.tolist()
     print(feature_select)
     print(len(feature_select))
     print('done')
