@@ -41,11 +41,12 @@ def RF(data):
     # Initialize a DecisionTreeClassifier object
     clf = RandomForestClassifier(**params)
 
-    # Fit the classifier to the training data
-    clf.fit(data.X_train, data.y_train)
+    # Fit the classifier to the training data, using top 16 features
+    # to get the best results for accuracy and F1 and decrease computation time
+    clf.fit(data.X_train.iloc[:, :16], data.y_train)
 
     # Use the trained classifier to make predictions on the test data
-    y_pred = clf.predict(data.X_test)
+    y_pred = clf.predict(data.X_test.iloc[:, :16])
 
     # # Calculate the accuracy of the classifier on the test data
     # accuracy = accuracy_score(data.y_test, y_pred)
